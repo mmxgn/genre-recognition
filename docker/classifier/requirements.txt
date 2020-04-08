@@ -1,0 +1,5 @@
+joblib
+scikit-learn
+tensorflow==1.15.0rc2
+flask
+xgboost

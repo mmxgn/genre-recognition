@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  classifier:
+    build: classifier
+    image: mmxgn/classify-genres-classifier:1.0
+    ports:
+      - 5000:5000
+    volumes:
+      - uploads:/tmp/uploads
+
+volumes:
+  uploads:
