@@ -84,7 +84,7 @@ The first argument is the audio to be classified, and the second the classifier 
 ## Deploying with `docker-compose`
 
 You can find a flask microservice for the classifier in the `docker` directory. First you need
-to place `features_classifier.pkl` from `models/` or Releases in the `docker/classifier/models` directory. Then you can build and run the microserve with:
+to place `features_classifier.pkl` from `models/` or Releases in the `docker/classifier/models` directory. Then you can build and run the microservice with:
 
 ```bash
 $ cd docker
@@ -104,7 +104,13 @@ $ docker-compose down
 ```
 ## Speeding up deployment
 
-In order to reduce the time taken for classification, as well guarantee constant time regardless of song duration, we used the `sox` library to trim 7 seconds around the middle of the song (which translates to roughly 5 feature vectors). This resulted in a constant duration of ~0.95 seconds per song regardless of song duration.
+In order to reduce the time taken for classification, as well guarantee constant time regardless of song duration, we used the `sox` library to trim 7 seconds around the middle of the song (which translates to roughly 5 feature vectors). This resulted in a constant duration of ~0.95 seconds per song (~2-fold decrease) regardless of song duration while accuracy suffered by a mere 2.4%.
+
+|Type|Time (ms) |Accuracy|
+|----|----|--------|
+|Original|1963±44|0.7828|
+|Truncated (7sec)|998±37|0.7586|
+|Difference| 197%| ~2.4%| 
 
 # Technical Report
 
